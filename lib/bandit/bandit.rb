@@ -1,0 +1,2 @@
+class Bandit::Bandit
+end
