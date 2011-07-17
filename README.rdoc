@@ -4,41 +4,45 @@ Bandit is intended as a solution to the Multi-armed bandit problem. See http://e
 
 = Terminology
 
-Entity:     The thing that you are trying to control.  In an e-commerce setting this could be a website user.
+*Entity*:     The thing that you are trying to control.  In an e-commerce setting this could be a website user.
 
-Features:   Things you know about each entity. These should be nominal attributes. Following the e-commerce example, this could be the hour of the users first visit.
+*Features*:   Things you know about each entity. These should be nominal attributes. Following the e-commerce example, this could be the hour of the users first visit.
 
-Strategies: These are all the actions your system can take on the entities. For example, you could send an email to a user.
+*Strategies*: These are all the actions your system can take on the entities. For example, you could send an email to a user. Each strategy should have a cost associated with it.
 
-Reactions:  These are all the actions that the entities in question can take.  For example, a user can complete a profile questionaire.
+*Responses*:  These are all the actions that the entities in question can take.  For example, a user can complete a profile questionaire. Each response should have a value associated with it.
 
-Notes:
-each column will be bound to its own table
-features will contain any pertinent information about the feature
-strategies will contain info about the strategy, including a numerical estimate of its cost
-reactions will include a numerical estimate of the value of the reaction 
+*Values*:     This is the abstract value associated with strategies and responses.  Good things should be positive, bad things should be negative.
 
-each feature can be bound to a strategy and a reaction by counting instances: p(f|s,r)
+= Notes
 
-then the probability of a given reaction can be inferred via Bayes theorem:
+The probability of a feature can be found by counting instances: p( f | s, r ) from COUNT( f, s, r )
 
-p(r|s,F) = Norm( Pi_i(p(f_i|s,r)) * p(s|r) *  p(r) )
+The probability of a given response can be inferred via Bayes theorem: p( r | s, f ) = Norm( Pi_i( p( f_i | s, r ) ) * p( s | r ) *  p( r ) )
 
-then the overall benefit can be estimated 
+The overall value can be estimated v( s | f ) = sum_r( p( r | f, s ) * v( r ) ) + v( s )
 
-Ben(s) = sum( p(r) * benefit(r) | s ) - cost(s)
+The overall values for each strategy can be compared, and the best one selected
 
-Multiple overall benefits can be compared, and the best one selected
+Several strategy selection algorithms can be used. In general, these will fall on the spectrum between pure explaore (choose a random strategy) and pure explot (choose the strategy with the highest expected value).
 
-if a bandit strategy is desired, can sample strategies with the likelihood equal to the probability the overall benefit is optimal
+= Architecture
 
-populating the main table is a seperate operation, which may involve an event engine
+Counts leading to probability calculations performed on (denormalized for performance) calculation table. This table should be generated dynamically.
 
-write a configuration dsl for specifying features, strategies and reactions.  run rake task, which generates migration
+Main storage performed on snoflake schema with events (performed strategies and responses) as facts. Strategies, responses, and entities are dimensions.
 
-high level model should include hooks for creating, updating and destroying rows in the main table, potentially based on other tables within the app
+Should allow for binding of arbitary features to entities.
 
+Updates to calculation table decoupled from normalized tables.
 
+= TO DO
+
+Write a configuration dsl for specifying features, strategies and reactions.  run rake task, which generates migration ??
+
+High level model should include hooks for creating, updating and destroying rows in the main table, potentially based on other tables within the app
+
+= Examples
 
 == Contributing to bandit
  
