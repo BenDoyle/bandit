@@ -10,9 +10,9 @@ Bandit is intended as a solution to the Multi-armed bandit problem. See http://e
 
 *Strategies*: These are all the actions your system can take on the entities. For example, you could send an email to a user. Each strategy should have a cost associated with it.
 
-*Responses*:  These are all the actions that the entities in question can take.  For example, a user can complete a profile questionaire. Each response should have a value associated with it.
+*Responses*:  These are all the actions that the entities can take.  For example, a user can complete a profile questionaire. Each response should have a value associated with it.
 
-*Values*:     This is the abstract value associated with strategies and responses.  Good things should be positive, bad things should be negative.
+*Values*:     This is the abstract value associated with strategies and responses.  For example, email could have a value of -1, and a completed profile could have a value of 2. Good things should be positive, bad things should be negative.
 
 = Notes
 
