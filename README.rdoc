@@ -5,8 +5,11 @@ Bandit is intended as a solution to the Multi-armed bandit problem. See http://e
 = Terminology
 
 Entity:     The thing that you are trying to control.  In an e-commerce setting this could be a website user.
+
 Features:   Things you know about each entity. These should be nominal attributes. Following the e-commerce example, this could be the hour of the users first visit.
+
 Strategies: These are all the actions your system can take on the entities. For example, you could send an email to a user.
+
 Reactions:  These are all the actions that the entities in question can take.  For example, a user can complete a profile questionaire.
 
 Notes:
