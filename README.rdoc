@@ -1,15 +1,15 @@
-= bandit
+= Bandit
 
 Bandit is intended as a solution to the Multi-armed bandit problem. See http://en.wikipedia.org/wiki/Multi-armed_bandit for details.
 
+= Terminology
+
+Entity:     The thing that you are trying to control.  In an e-commerce setting this could be a website user.
+Features:   Things you know about each entity. These should be nominal attributes. Following the e-commerce example, this could be the hour of the users first visit.
+Strategies: These are all the actions your system can take on the entities. For example, you could send an email to a user.
+Reactions:  These are all the actions that the entities in question can take.  For example, a user can complete a profile questionaire.
+
 Notes:
-
-main table has three types of columns (all of which contain nominal integer values):
-entity_id:  unique id
-features:   things you know about the entity in question (i.e. age, group affiliation, etc).  These may include histor of interaction 
-strategies: sets of mututally exclusive options available for you intervention with the entities (offer coupon, call etc.)
-reactions:  sets of mutually exclusive resposes to your intervention (bought the item, took the desired acton, etc)
-
 each column will be bound to its own table
 features will contain any pertinent information about the feature
 strategies will contain info about the strategy, including a numerical estimate of its cost
