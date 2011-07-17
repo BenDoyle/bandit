@@ -1,4 +1,4 @@
-= Bandit
+= Overview
 
 Bandit is intended as a solution to the Multi-armed bandit problem. See http://en.wikipedia.org/wiki/Multi-armed_bandit for details.
 
